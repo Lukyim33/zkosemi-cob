@@ -61,7 +61,7 @@ export function createWorkshop(floor,products,view,control,sim,onCaption,onArriv
         dock(cell);floor.setCutaway(route,index,0);
         onCaption('定位工位 · '+cell.title);cellCamera(cell,.85);
       }},
-      {duration:.82,start(){onCaption('剖视设备 · 打开观察视野');},
+      {duration:.82,start(){onCaption('设备剖视');},
        sample(t){floor.setCutaway(route,index,mix(t,0,1));}},
       {duration:1.02,start(){
         floor.setCutaway(route,index,1);displayStep=sim.step;carrying=false;

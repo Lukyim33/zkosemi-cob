@@ -53,7 +53,7 @@ header, footer { position: relative; z-index: 4; background: var(--paper); }
 #brand { justify-self: start; gap: 11px; padding: 0; text-align: left; }
 .brandmark { width: 35px; height: 38px; color: var(--accent); stroke: none; }
 #brand strong { display: block; font-size: clamp(16px,1.3vw,22px); font-weight: 730; line-height: 1.2; }
-#brand small { display: block; margin-top: 4px; font-size: 11px; font-weight: 690; letter-spacing: .2em; color: var(--muted); }
+#brand small { display: block; margin-top: 4px; font-size: 11px; font-weight: 690; line-height: 1.4; color: var(--muted); }
 nav { height: 100%; gap: clamp(6px,1.15vw,24px); }
 nav button {
   position: relative; height: 100%; padding: 0 clamp(7px,1vw,21px);
@@ -66,7 +66,6 @@ nav button[aria-current="page"]::after {
 }
 .top-tools { justify-self: end; gap: 8px; }
 .top-tools button { justify-content: center; gap: 8px; font-size: 14px; font-weight: 600; }
-#sources { padding-inline: 9px; }
 .icon-btn, .viewtools button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; }
 .top-tools .icon-btn { border-left: 1px solid var(--line); border-radius: 0; }
 #stage { flex: 1; min-height: 0; position: relative; isolation: isolate; overflow: hidden; background: #eaede7; }
@@ -243,12 +242,6 @@ input[type="range"] { margin: 0; height: 44px; accent-color: var(--accent); curs
 #test-readout strong { font-size: 16px; }
 #test-readout.passed strong { color: #246944; }
 #loading { position: absolute; z-index: 6; inset: 0; display: grid; place-items: center; background: var(--soft); color: var(--muted); padding: 24px; text-align: center; }
-dialog { width: min(540px,94vw); max-height: 84dvh; overflow: auto; border: 0; color: var(--ink); background: var(--panel); border-radius: 10px; padding: 18px 25px 24px; box-shadow: 0 20px 65px #1d282932; }
-dialog::backdrop { background: #25332f65; }
-dialog h2 { font-size: 23px; margin: 0; }
-dialog h3 { font-size: 16px; margin: 18px 0 3px; }
-dialog p { font-size: 14px; line-height: 1.65; color: var(--muted); }
-dialog a { display: flex; align-items: center; min-height: 44px; border-bottom: 1px solid var(--line); color: var(--accent); font-size: 14px; text-underline-offset: 3px; }
 @media (hover:hover) {
   :where(.subtle,.inspect,.icon-btn,.top-tools button,.viewtools button,.step-btn,.route-card):not(:disabled):hover { background: #eaf0e7; }
   .primary:not(:disabled):hover { background: #9e3b17; }

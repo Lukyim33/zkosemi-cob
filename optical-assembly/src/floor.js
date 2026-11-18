@@ -169,7 +169,7 @@ export function createFloor() {
   }
   b(rear,'satin',0,3.37,0,16.22,.15,.28);
   b(rear,'slate',0,3.18,.24,15.9,.11,.16);
-  label(rear,'PHOTONICS    /    ASSEMBLY',-.04,2.98,.075,3.13,.24,{bg:'#e8ebea',fg:'#465559'});
+  label(rear,'ZKOSEMI',-.04,2.98,.075,3.13,.24,{bg:'#e8ebea',fg:'#465559'});
   const side=group(staticShop,-8.02,0,-.07);
   side.rotation.y=Math.PI/2;
   b(side,'white',0,1.51,0,8.99,3.02,.13);

@@ -4,13 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#f7f8f5">
-  <title>光引擎装配现场 · Photon Works</title>
+  <title>光引擎装配现场 · ZKOSEMI</title>
   <link rel="stylesheet" href="./style.css">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head>
 <body>
 <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
-  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5c-3-2-6-2-10-1v14c4-1 7-1 10 1 3-2 6-2 10-1V4c-4-1-7-1-10 1Zm0 0v14"/></symbol>
   <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="m7 4 13 8-13 8Z" fill="currentColor" stroke="none"/></symbol>
   <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14m8-14v14" stroke-width="3.5"/></symbol>
@@ -28,13 +27,13 @@
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.3"/></symbol>
 </defs></svg>
 <header class="masthead">
-  <button id="brand" aria-label="光引擎装配现场，返回车间总览">
+  <button id="brand" aria-label="深圳市中科光芯半导体科技有限公司（ZKOSEMI），返回车间总览">
     <svg class="brandmark" viewBox="0 0 42 42" aria-hidden="true">
       <path d="m3 14 17.8-10 18 10-10 5.5-8-4.6-8 4.6Z" fill="currentColor"/>
       <path d="m3 21 17.8 10 18-10v8L20.8 39 3 29Z" fill="currentColor"/>
       <path d="m13 22.7 7.8-4.5 8 4.5-8 4.5Z" fill="currentColor"/>
     </svg>
-    <span><strong>光引擎装配现场</strong><small>PHOTON WORKS</small></span>
+    <span><strong>ZKOSEMI</strong><small>深圳市中科光芯半导体科技有限公司</small></span>
   </button>
   <nav aria-label="展厅分区">
     <button data-page="overview" aria-current="page">车间总览</button>
@@ -43,7 +42,6 @@
   </nav>
   <div class="top-tools">
     <a class="actual-workshop-link" href="../">实际车间</a>
-    <button id="sources" aria-label="查看资料说明"><svg aria-hidden="true"><use href="#i-book"/></svg><span>资料说明</span></button>
     <button id="fullscreen" class="icon-btn" title="切换全屏" aria-label="切换全屏"><svg aria-hidden="true"><use href="#i-expand"/></svg></button>
   </div>
 </header>
@@ -53,7 +51,6 @@
   <section class="intro" aria-labelledby="title">
     <div class="loc" aria-label="当前位置"><svg aria-hidden="true"><use href="#i-pin"/></svg><span id="location">装配车间</span><b aria-hidden="true">/</b><span id="location-code">FLOOR 01</span></div>
     <h1 id="title">车间总览</h1>
-    <p id="description">点选工位，跟随工件看两种光引擎怎样装起来。</p>
     <div class="intro-actions">
       <button id="start-tour" class="primary"><svg aria-hidden="true"><use href="#i-play"/></svg>自动导览</button>
       <button id="station-back" class="subtle" hidden><svg aria-hidden="true"><use href="#i-back"/></svg><span>查看工位</span></button>
@@ -76,9 +73,8 @@
   </aside>
   <aside id="align-panel" class="instrument" aria-labelledby="align-title" hidden>
     <div class="panel-title"><strong id="align-title">对准微调</strong><svg aria-hidden="true"><use href="#i-focus"/></svg></div>
-    <p class="align-instruction" id="align-help">拖动光纤或下方光点靠近靶心，观察耦合功率。</p>
     <div class="alignment-body">
-      <div id="align-pad" tabindex="0" role="group" aria-label="二维对准微调区，可拖动或使用方向键" aria-describedby="align-help">
+      <div id="align-pad" tabindex="0" role="group" aria-label="二维对准微调区，可拖动或使用方向键">
         <span class="axis-x" aria-hidden="true">水平</span><span class="axis-y" aria-hidden="true">高度</span>
         <span class="crosshair" aria-hidden="true"></span><span id="align-marker" aria-hidden="true"></span>
       </div>
@@ -93,22 +89,21 @@
   <div id="transition-caption" role="status" hidden></div>
   <div id="test-readout" role="status" hidden><span>光电通路 · 模拟检测</span><strong id="test-state"></strong></div>
   <div id="selection" role="status" hidden></div>
-  <div class="view-foot"><span class="view-id"><i aria-hidden="true"></i><span id="scene-code">W–00</span><b aria-hidden="true">/</b><span id="scene-meta">全景视图</span></span>
-    <span class="mouse-hint"><svg aria-hidden="true"><use href="#i-orbit"/></svg><span class="pointer-hint">拖动旋转 · 滚轮缩放</span><span class="touch-hint">单指旋转 · 双指缩放</span></span></div>
+  <div class="view-foot"><span class="view-id"><i aria-hidden="true"></i><span id="scene-code">W–00</span><b aria-hidden="true">/</b><span id="scene-meta">全景视图</span></span></div>
   <div id="loading" role="status">正在准备三维车间…</div>
 </main>
 
 <footer>
   <div id="overview-dock">
-    <div class="dock-intro"><strong>选择产线</strong><small>点选工位可直接进入</small></div>
+    <div class="dock-intro"><strong>选择产线</strong></div>
     <button class="route-card" data-route="vcsel">
       <span class="route-symbol"><span class="route-letter">A</span><svg viewBox="0 0 72 40" aria-hidden="true"><path d="m5 21 37-16 24 10-37 17Z M5 21v5l24 11 37-17v-5M29 32v5M14 20l23 10m-18-12 23 10m-18-12 23 10m-18-12 23 10M48 11l8 3-6 3-8-3Z"/></svg></span>
-      <span class="route-copy"><strong>800G VCSEL 光引擎</strong><small>可插拔模块 <i></i> 多模光纤</small></span>
+      <span class="route-copy"><strong>800G VCSEL 光引擎</strong></span>
       <svg class="route-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
     </button>
     <button class="route-card" data-route="cpo">
       <span class="route-symbol"><span class="route-letter">B</span><svg viewBox="0 0 72 40" aria-hidden="true"><path d="m5 21 30-16 31 15-30 16Z M5 21v3l31 15 30-16v-3 M24 19l12-6 12 6-12 6Z M24 19v3l12 6 12-6v-3 M14 21l6-3 7 3-6 3Z M44 24l6-3 7 3-6 3Z M41 12l4-2 7 3-4 2Z M22 28l4-2 6 3-4 2Z"/></svg></span>
-      <span class="route-copy"><strong>CPO 硅光引擎</strong><small>交换芯片共封装 <i></i> 硅光芯片</small></span>
+      <span class="route-copy"><strong>CPO 硅光引擎</strong></span>
       <svg class="route-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
     </button>
   </div>
@@ -123,12 +118,6 @@
     <button id="inspect" class="inspect"><svg aria-hidden="true"><use href="#i-grid"/></svg><span>成品拆解</span></button>
   </div>
 </footer>
-<dialog id="source-dialog" aria-labelledby="sources-title">
-  <div class="panel-title"><h2 id="sources-title">资料与模型说明</h2><button id="close-sources" class="icon-btn" aria-label="关闭说明"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div>
-  <p>展项依据公开产品架构呈现两条代表性装配路线。装配顺序、零件比例、设备动作和检测读数均为展览示意。</p>
-  <h3>A　800G VCSEL 光引擎</h3><div id="refs-a"></div>
-  <h3>B　CPO 硅光引擎</h3><div id="refs-b"></div>
-</dialog>
 <script type="module" src="./src/main.js"></script>
 </body>
 </html>

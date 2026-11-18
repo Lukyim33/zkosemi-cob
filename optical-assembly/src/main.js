@@ -6,7 +6,6 @@ import {alignmentSample} from './alignment.js';
 import {createFloor} from './floor.js';
 import {createVCSEL} from './vcsel.js';
 import {createCPO} from './cpo.js';
-import {refs} from './sources.js';
 
 const $=id=>document.getElementById(id);
 const each=(s,fn)=>document.querySelectorAll(s).forEach(fn);
@@ -19,7 +18,7 @@ try {view=createScene(canvas);}
 catch(error){$('loading').textContent='请使用支持 WebGL 2 的浏览器，并启用硬件加速后刷新。';throw error;}
 const floor=createFloor(),products={vcsel:createVCSEL(),cpo:createCPO()};
 const hidden=new Set();
-let spread=.65,last=performance.now(),selectionTimer,sourceOpen=false;
+let spread=.65,last=performance.now(),selectionTimer;
 let stationPins=[],timelineButtons=[],lastBar=-1;
 const control=createInteraction(canvas,view.camera,picked,manualCamera,{
   enabled:()=>sim.phase==='align'&&shop.level==='detail'&&!sim.inspect,
@@ -77,7 +76,7 @@ function positionPins(){
 function buildTimeline(){
   timelineButtons=current().steps.map((s,i)=>{
     const b=document.createElement('button'),n=document.createElement('small'),rail=document.createElement('span');
-    b.className='step-btn';b.title=s.action;n.textContent=String(i+1).padStart(2,'0');
+    b.className='step-btn';b.title=s.title;n.textContent=String(i+1).padStart(2,'0');
     rail.className='rail';rail.append(document.createElement('i'));b.append(n,s.title,rail);
     b.onclick=()=>seek(i);return b;
   });
@@ -102,7 +101,7 @@ function renderAlignment(){
   $('align-pad').setAttribute('aria-label','光纤微调，方向键移动。模拟相对功率 '+displayedPower+'%');
   const fixed=sim.phase==='fix';
   $('align-panel').classList.toggle('ready',ready);
-  label('align-status',fixed?'正在固定光纤阵列':ready?'已进入目标范围，可以固定':'向靶心微调，观察功率上升');
+  label('align-status',fixed?'正在固定':ready?'可固定':'等待对准');
   $('align-fix').disabled=fixed||!ready;
 }
 function refresh(){
@@ -117,14 +116,12 @@ function refresh(){
   each('[data-page]',b=>b.setAttribute('aria-current',b.dataset.page===sim.route?'page':'false'));
   if(overview){
     label('location','洁净装配车间');label('location-code','FLOOR 01');label('title','车间总览');
-    label('description','轻触设备标记进入工位，跟随工件探索两种光引擎的装配过程。');
     label('scene-code','W–00');label('scene-meta','全景视图');$('test-readout').hidden=true;return;
   }
   const s=current().steps[sim.step],index=stationMap[sim.route][sim.step];
   const cell=floor.stations[sim.route][index],id=letters[sim.route]+(index+1),n=String(sim.step+1).padStart(2,'0');
   label('location',titles[sim.route]);label('location-code',id+' / '+cell.title);
   label('title',sim.inspect?'成品拆解':shop.level==='station'?cell.title:align?'光纤阵列对准':s.title);
-  label('description',sim.inspect?'滑动分开各层，轻触零件查看名称。':shop.level==='station'?'半透明外罩内是当前工件。轻触「进入工件」继续观察。':align?'左右移动调整水平位置，上下移动调整高度。让纤芯对准芯片边缘的波导入口。':s.action+' '+s.why);
   label('counter',sim.inspect?'成品':n+' / 06');label('scene-code',id+' · '+n);
   label('scene-meta',sim.inspect?'分层视图':align?'手动微调':shop.level==='station'?'设备剖视':flight?'工位导航':'工件近景');
   $('station-back').querySelector('span').textContent=shop.level==='station'?'进入工件':'查看工位';
@@ -194,14 +191,6 @@ $('play').onclick=()=>{if(sim.finished){visit(sim.route);return;}sim.toggle();re
 $('inspect').onclick=toggleInspection;$('close-parts').onclick=toggleInspection;
 $('explode').oninput=e=>{spread=Number(e.target.value)/100;label('percent',e.target.value+'%');};
 $('reset').onclick=()=>shop.reset();$('zoom-in').onclick=()=>control.zoom(1.22);$('zoom-out').onclick=()=>control.zoom(1/1.22);
-for(const [key,links] of Object.entries(refs))for(const [title,url] of links){
-  const a=document.createElement('a');a.href=url;a.textContent=title+' ↗';a.target='_blank';a.rel='noopener noreferrer';$('refs-'+key).append(a);
-}
-const dialog=$('source-dialog');
-$('sources').onclick=()=>{sourceOpen=true;dialog.showModal();};
-$('close-sources').onclick=()=>dialog.close();
-dialog.addEventListener('close',()=>{sourceOpen=false;last=performance.now();});
-dialog.onclick=e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}};
 $('fullscreen').onclick=async()=>{
   try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}
   catch{notify('请在浏览器中打开预览，使用全屏展示。');}
@@ -223,7 +212,7 @@ function updateTime(dt){
   refresh();
 }
 function draw(now){
-  const dt=document.hidden||sourceOpen?0:Math.min(.5,Math.max(0,(now-last)/1000));
+  const dt=document.hidden?0:Math.min(.5,Math.max(0,(now-last)/1000));
   last=now;
   view.adaptResolution(dt);
   if(shop.level==='flight')shop.step(dt);
